@@ -1,6 +1,11 @@
 
 # Itsbetter
 
+## Installer l'extension
+
+ 1. Téléchargez le fichier [itsbetter.crx](https://github.com/devmlb/itsbetter/releases/latest)
+ 2. 
+
 ## Contribuer au développement
 
 ### Charger la dernière version de l'extension à partir des sources
@@ -40,15 +45,15 @@
 - `desc` : description de votre mod affichée dans le popup de l'extension
 - `frame` : `main` pour que vos fichiers soient injectés dans la frame principale uniquement ou `all` pour qu'ils soient injectés dans toutes les frames (iframes)
 - `default-state` : `true` pour que votre mod soit activé par défaut quand l'utilisateur installe l'extension ou la met à jour, ou au contraire `false`
-- `files` : liste des chemins des fichiers CSS et/ou JS mélangés nécessaires pour faire fonctionner votre mod ; un chemin est de la forme `/mods/votre-fichier` 
+- `files` : liste des chemins des fichiers CSS et/ou JS mélangés nécessaires pour faire fonctionner votre mod ; un chemin est de la forme `/mods/votre-fichier`  
 *Note : le `/` initial n'est pas obligatoire*
 - Facultatif *(non implémenté pour l'instant)* `matches` : la ou les URL pour lesquelles votre mod sera appliqué
 - `version` : la version de votre mod affichée dans le popup de l'extension
 - `hidden` : `true` pour que votre mod soit affiché dans le popup de l'extension, ou au contraire `false`
 
  3. Actualisez l'extension (**à chaque modification du fichier `available-mods.json`**) dans le [gestionnaire d'extensions de Chrome](chrome://extensions/) avec le bouton `Mettre à jour`
- 4.  Modifiez vos fichiers de mods (une actualisation de la page suffit pour que les nouvelles modifications apparaissent)
-*Note 1 : vous pouvez vous aider des outils de développement (`Ctrl+Maj+i`) pour comprendre le fonctionnement interne d'Itslearning et repérer les classes/id des éléments que vous souhaitez modifier
+ 4.  Modifiez vos fichiers de mods (une actualisation de la page suffit pour que les nouvelles modifications apparaissent)  
+*Note 1 : vous pouvez vous aider des outils de développement (`Ctrl+Maj+i`) pour comprendre le fonctionnement interne d'Itslearning et repérer les classes/id des éléments que vous souhaitez modifier  
 Note 2 : les fichiers injectés ne sont pour l'instant pas prioritaires dans l'ordre de chargement des ressources par le navigateur, il sera donc très souvent nécessaire d'ajouter `!important` dans vos règles CSS pour remplacer celles d'Itslearning*
 
 #### Modifier le fonctionnement interne
@@ -56,3 +61,7 @@ Note 2 : les fichiers injectés ne sont pour l'instant pas prioritaires dans l'o
 Après avoir lu la documentation du fonctionnement interne de l'extension, vous pouvez apporter des modifications pour l'améliorer. Une actualisation de l'extension dans le [gestionnaire d'extensions de Chrome](chrome://extensions/) avec le bouton `Mettre à jour` est **nécessaire à chaque changement, sauf pour les fichiers du popup**.
 
 ### Soumettre les modifications
+
+ 1. Créez une nouvelle branche dans le repo et poussez-y vos modifications
+ 2. Soumettez une pull request et attendez la réponse 
+ 3. Bravo, vous avez réussi ! :)
