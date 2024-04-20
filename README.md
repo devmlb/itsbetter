@@ -56,3 +56,7 @@ Note 2 : les fichiers injectés ne sont pour l'instant pas prioritaires dans l'o
 Après avoir lu la documentation du fonctionnement interne de l'extension, vous pouvez apporter des modifications pour l'améliorer. Une actualisation de l'extension dans le [gestionnaire d'extensions de Chrome](chrome://extensions/) avec le bouton `Mettre à jour` est **nécessaire à chaque changement, sauf pour les fichiers du popup**.
 
 ### Soumettre les modifications
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
