@@ -7,14 +7,35 @@ function getModById(modId, modsList) {
     return null;
 }
 
+function checkUpdates() {
+    fetch('https://devmlb.github.io/itsbetter/release.json')
+        .then(response => response.json())
+        .then(data => {
+            const latestVersion = data['latest-version'];
+            const currentManifestVersion = chrome.runtime.getManifest().version
+            if (latestVersion != currentManifestVersion) {
+                const updateCard = document.getElementById('update-card');
+                updateCard.style.display = "flex"
+                updateCard.addEventListener("click", function() {
+                    window.open('https://github.com/devmlb/itsbetter/releases/latest', '_blank').focus();
+                });
+            }
+        });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     mdui.setColorScheme('#f47920');
     const settingsCard = document.getElementById("settings");
     const activeSwitch = document.getElementById("active-switch");
     const activeSwitchHoverEffect = document.querySelector("#active-switch").shadowRoot.querySelector("label > div > div > mdui-ripple").shadowRoot.querySelector("div")
     const divActiveSwitch = document.getElementById("div-active-switch");
+    const checkUpdatesBtn = document.getElementById("check-updates-btn");
     divActiveSwitch.addEventListener("click", function() {
         activeSwitch.click()
+    });
+    checkUpdatesBtn.addEventListener("click", function() {
+        checkUpdates();
+        window.scrollTo({top: 0, behavior: 'smooth'});
     });
     divActiveSwitch.addEventListener("mouseover", function() {
         activeSwitch.setAttribute('hover', '');
@@ -24,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         activeSwitch.removeAttribute('hover', '');
         activeSwitchHoverEffect.classList.remove("hover");
     });
+    checkUpdates();
     fetch(chrome.runtime.getURL("available-mods.json")).then(function (response) {
         return response.json();
     }).then(function (modsList) {

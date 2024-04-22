@@ -206,6 +206,7 @@ chrome.webNavigation.onCommitted.addListener(function(details) {
 // Updates settings storage when the extension is installed or updated
 chrome.runtime.onInstalled.addListener(function(details) {
     const currentVersion = chrome.runtime.getManifest().version;
+    chrome.alarms.create("updateAlarm", { delayInMinutes: 1, periodInMinutes: 1440 })
     if (details.reason == "update") {
         if (currentVersion == details.previousVersion) {
             console.warn("The previous version of the extension ("+details.previousVersion+") and the current version ("+currentVersion+") are identical, despite an update. Has the version been updated in the manifest?")
@@ -214,4 +215,23 @@ chrome.runtime.onInstalled.addListener(function(details) {
     } else {
         checkSettingsStorage(null, null);
     }
+});
+
+chrome.alarms.onAlarm.addListener((alarm) => {
+    fetch('https://devmlb.github.io/itsbetter/release.json')
+        .then(response => response.json())
+        .then(data => {
+            const latestVersion = data['latest-version'];
+            const currentManifestVersion = chrome.runtime.getManifest().version
+            if (latestVersion != currentManifestVersion) {
+                console.log('Update available! (v'+currentManifestVersion+" > v"+latestVersion+")");
+                chrome.action.setBadgeText({ text: " " })
+                chrome.action.setBadgeTextColor({ color: [255, 255, 255, 255] })
+                chrome.action.setBadgeBackgroundColor({ color: [186, 26, 26, 255] })
+            }
+        })
+        .catch(error => {
+            console.error('Error when checking for update:', error);
+        });
+
 });
