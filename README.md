@@ -25,7 +25,7 @@ Référez-vous à la [documentation sur les mods](https://github.com/devmlb/itsb
 
 #### Modifier le fonctionnement interne
 
-Après avoir lu la [documentation du fonctionnement de l'extension](https://github.com/devmlb/itsbetter/wiki/Accueil), vous pouvez apporter des modifications pour l'améliorer. Une actualisation de l'extension dans le [gestionnaire d'extensions de Chrome](chrome://extensions/) avec le bouton `Mettre à jour` est **nécessaire à chaque changement, sauf pour les fichiers du popup**.
+Après avoir consulté la [documentation du fonctionnement de l'extension](https://github.com/devmlb/itsbetter/wiki/Accueil), vous pouvez apporter des modifications pour l'améliorer. Une actualisation de l'extension dans le [gestionnaire d'extensions de Chrome](chrome://extensions/) avec le bouton `Mettre à jour` est **nécessaire à chaque changement, sauf pour les fichiers du popup**.
 
 ### Soumettre les modifications
 
