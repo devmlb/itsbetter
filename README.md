@@ -21,7 +21,7 @@ ItsBetter est une extension pour le navigateur Chrome (théoriquement tous les n
 
 #### Ajouter des mods
 
-Référez-vous à la [documentation sur les mods](https://github.com/devmlb/itsbetter/wiki/Mods)
+Référez-vous à la [documentation sur les mods](https://github.com/devmlb/itsbetter/wiki/Mods).
 
 #### Modifier le fonctionnement interne
 

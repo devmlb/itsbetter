@@ -114,8 +114,8 @@ let html = `
 let newFeaturesList = ""
 fetch(chrome.runtime.getURL("release.json")).then(function (response) {
     return response.json();
-}).then(function (newFeatures) {
-    for (const feature of newFeatures) {
+}).then(function (newRelease) {
+    for (const feature of newRelease["new-features"]) {
         newFeaturesList += "<li>"+feature+"</li>"
     }
 
