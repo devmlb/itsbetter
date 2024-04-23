@@ -5,9 +5,7 @@ ItsBetter est une extension pour le navigateur Chrome (théoriquement tous les n
 
 ## Installer, désinstaller et mettre à jour l'extension
 
-Référez-vous à [à la procédure d'installation pour votre navigateur](https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#installation)
-Référez-vous à [à la procédure de mise à jour pour votre navigateur](https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#mise-%C3%A0-jour)
-Référez-vous à [à la procédure d'installation pour votre navigateur](https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#d%C3%A9sinstallation)
+Référez-vous à la procédure [d'installation](https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#installation), [de mise à jour](https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#mise-%C3%A0-jour) ou [de désinstallation](https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#d%C3%A9sinstallation) pour votre navigateur
 
 ## Contribuer au développement
 
