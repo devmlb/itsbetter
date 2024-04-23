@@ -3,9 +3,11 @@
 
 ItsBetter est une extension pour le navigateur Chrome (théoriquement tous les navigateurs basés sur chromium, mais ils ne sont pas testés) qui modifie l'apparence du [site Itslearning](https://itslearning.com/index.aspx), utilisé pour faire fonctionner de nombreux ENT. Cette extension a pour but d'apporter de la cohérence et de la praticité à l'interface.
 
-## Installer l'extension
+## Installer, désinstaller et mettre à jour l'extension
 
-À venir...
+Référez-vous à [à la procédure d'installation pour votre navigateur](https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#installation)
+Référez-vous à [à la procédure de mise à jour pour votre navigateur](https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#mise-%C3%A0-jour)
+Référez-vous à [à la procédure d'installation pour votre navigateur](https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#d%C3%A9sinstallation)
 
 ## Contribuer au développement
 
