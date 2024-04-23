@@ -1,6 +1,7 @@
 {
     "latest-version": "1.0.1",
     "new-features": [
-        "Ajout d'un système de mise à jour"
+        "Ajout d'un système de mise à jour",
+        "Nettoyage du code"
     ]
 }
