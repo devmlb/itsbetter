@@ -62,6 +62,13 @@ function getModById(modId, modsList) {
     return null;
 }
 
+function injectedFunction() {
+    let metaTag = document.createElement("meta");
+    metaTag.setAttribute("http-equiv", "Content-Security-Policy");
+    metaTag.setAttribute("content", "font-src * 'unsafe-inline';");
+    document.head.appendChild(metaTag)
+}
+
 function injectContent(modsInfo, requiredContent, url, tabId, frameId) {
     const CSSfilesToAdd = [];
     const JSfilesToAdd = [];
@@ -100,6 +107,12 @@ function injectContent(modsInfo, requiredContent, url, tabId, frameId) {
             }
         }
     }
+      
+    // chrome.scripting.executeScript({
+    //     target: { tabId: tabId, frameIds: [frameId] },
+    //     func : injectedFunction,
+    // });
+
     if (CSSfilesToAdd.length > 0) {
         console.log("Injecting CSS files '"+CSSfilesToAdd+"' in tab with id '"+tabId+"' in frame with id '"+frameId+"'")
         chrome.scripting.insertCSS({
