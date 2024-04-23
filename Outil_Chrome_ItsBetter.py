@@ -24,7 +24,7 @@ class App:
             sv_ttk.set_theme("light")
         self.root.title("ItsBetter - Autoriser l'extension")
         self.root.geometry("400x200")
-        self.root.iconbitmap(r'itsbetter-icon-48.ico')
+##        self.root.iconbitmap(r'itsbetter-icon-48.ico')
         self.progress_txt = StringVar()
         self.progress_txt.set("0 %")
         self.task_txt = StringVar()
