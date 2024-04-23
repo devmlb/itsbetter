@@ -5,7 +5,7 @@ ItsBetter est une extension pour le navigateur Chrome (théoriquement tous les n
 | Navigateur | Disponibilité | Spécificités
 |--|--|--|
 | Chrome | ✅ | Chrome pour Windows uniquement |
-| Firefox | ❌ | ❌ |
+| Firefox | ✅ | Windows, Linux et Mac |
 | Edge| ❌ | ❌ |
 | Opera| ❌ | ❌ |
 

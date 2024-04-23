@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Material Icons Round';
+    font-style: normal;
+    font-weight: 400;
+}
+
 /* Chrome */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     @font-face {
