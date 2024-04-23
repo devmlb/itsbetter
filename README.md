@@ -18,7 +18,7 @@ Référez-vous à la procédure [d'installation](https://github.com/devmlb/itsbe
 ### Charger la dernière version de l'extension à partir des sources
 
 1. Clonez le repo en entrant `git clone https://github.com/devmlb/itsbetter.git` dans un terminal ou avec l'application [GitHub Desktop](https://desktop.github.com/)
-2. Accédez au [gestionnaire d'extensions de Chrome](chrome://extensions/)
+2. Accédez au gestionnaire d'extensions de Chrome en saisissant `chrome://extensions/` dans la barre d'adresse
 3. Activez le mode développeur en cliquant sur le bouton en haut à droite
 4. Cliquez sur `Charger l'extension non empaquetée` et sélectionnez le dossier où vous avez cloné le repo
 5. Félicitations ! L'extension est maintenant installée et active
