@@ -112,10 +112,10 @@ let html = `
 `
 
 let newFeaturesList = ""
-fetch(chrome.runtime.getURL("release.json")).then(function (response) {
+fetch("https://devmlb.github.io/itsbetter/release.json").then(function (response) {
     return response.json();
 }).then(function (newRelease) {
-    for (const feature of newRelease["https://devmlb.github.io/itsbetter/release.json"]) {
+    for (const feature of newRelease["new-features"]) {
         newFeaturesList += "<li>"+feature+"</li>"
     }
 

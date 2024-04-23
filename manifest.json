@@ -23,7 +23,7 @@
     },
     "web_accessible_resources": [
         {
-        "resources": ["/mods/*", "update.html", "/mdui/*", "/icons/*", "release.json"],
+        "resources": ["/mods/*", "update.html", "/mdui/*", "/icons/*", "https://devmlb.github.io/itsbetter/*"],
         "matches": ["<all_urls>"]
         }
     ],
