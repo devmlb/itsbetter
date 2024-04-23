@@ -53,15 +53,6 @@ function checkSettingsStorage(previousReleaseVersion, currentReleaseVersion) {
     });
 }
 
-// function keyInListOfDict(key, listOfDicts) {
-//     for (let element of listOfDicts) {
-//         if (element.hasOwnProperty(key)) {
-//             return true;
-//         }
-//     }
-//     return false;
-// }
-
 function getModById(modId, modsList) {
     for (const element of modsList) {
         if (Object.values(element).includes(modId)) {
@@ -70,69 +61,6 @@ function getModById(modId, modsList) {
     }
     return null;
 }
-
-// function initRegisteredContent(modsInfo, requiredContent) {
-//     chrome.scripting.getRegisteredContentScripts().then((registeredContent) => {
-//         console.log("Registered content script: " + JSON.stringify(registeredContent));
-//         let toRemove = [];
-//         for (let element of registeredContent) {
-//             if (!requiredContent.includes(element.id)) {
-//                 toRemove.push(element.id);
-//             }
-//         }
-//         if (toRemove.length != 0) {
-//             console.log("Updating content scripts registering: removing " + toRemove);
-//             chrome.scripting.unregisterContentScripts({ ids: toRemove })
-//         }
-//         let toAdd = [];
-//         for (let key in requiredContent) {
-//             if (!keyInListOfDict(key, registeredContent) && key !== "active-extension") {
-//                 let tempDict = {
-//                     "matches": ['https://*.itslearning.com/*'],
-//                     "persistAcrossSessions": true,
-//                     "runAt": "document_start",
-//                     "world": "ISOLATED"
-//                 };
-//                 let tempMod = getModById(key, modsInfo);
-//                 tempDict.id = key;
-//                 tempDict.allFrames = tempMod["all-frames"];
-//                 tempDict.matches = tempMod.matches;
-//                 let tempCSSFiles = [];
-//                 let tempJSFiles = [];
-//                 for (let fileName of tempMod.files) {
-//                     if (fileName.includes("css")) {
-//                         tempCSSFiles.push(fileName);
-//                     } else if (fileName.includes("js")) {
-//                         tempJSFiles.push(fileName);
-//                     }
-//                 }
-//                 if (tempCSSFiles.length !== 0) {
-//                     tempDict.css = tempCSSFiles;
-//                 }
-//                 if (tempJSFiles.length !== 0) {
-//                     tempDict.js = tempJSFiles;
-//                 }
-//                 toAdd.push(tempDict);
-//             }
-//         }
-//         if (Object.keys(toAdd).length != 0) {
-//             console.log("Updating content scripts registering: adding " + JSON.stringify(toAdd));
-//             chrome.scripting.registerContentScripts(toAdd).then(function () {
-//                 chrome.scripting.getRegisteredContentScripts().then(scripts => console.log("registered content scripts", scripts));
-//             });
-//         }
-//     });
-// }
-
-// function checkRegisteredContent() {
-//     fetch(chrome.runtime.getURL("available-mods.json")).then(function (response) {
-//         return response.json();
-//     }).then(function (data) {
-//         chrome.storage.sync.get(null, function (localSettings) {
-//             initRegisteredContent(data, localSettings)
-//         });
-//     });
-// }
 
 function injectContent(modsInfo, requiredContent, url, tabId, frameId) {
     const CSSfilesToAdd = [];
@@ -217,6 +145,7 @@ chrome.runtime.onInstalled.addListener(function(details) {
     }
 });
 
+// Checks for updates every 24 hours, and displays a badge if necessary
 chrome.alarms.onAlarm.addListener((alarm) => {
     fetch('https://devmlb.github.io/itsbetter/release.json')
         .then(response => response.json())
