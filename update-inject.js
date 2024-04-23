@@ -115,7 +115,7 @@ let newFeaturesList = ""
 fetch(chrome.runtime.getURL("release.json")).then(function (response) {
     return response.json();
 }).then(function (newRelease) {
-    for (const feature of newRelease["new-features"]) {
+    for (const feature of newRelease["https://devmlb.github.io/itsbetter/release.json"]) {
         newFeaturesList += "<li>"+feature+"</li>"
     }
 
