@@ -185,10 +185,12 @@ class App:
             except FileNotFoundError:
                 return {"key_path": key_path, "error": (False, "")}
             except OSError as e:
+                if "WinError 5" in str(e):
+                    return {"key_path": key_path, "error": (False, "")}
                 return {"key_path": key_path, "error": (True, e)}
 
         def start_proc():
-            self.start_proc_ui(2)
+            self.start_proc_ui(6)
             try:
                 key_paths = [
                     r"SOFTWARE\Policies\Google\Chrome\ExtensionInstallWhitelist",
@@ -196,7 +198,6 @@ class App:
                     r"SOFTWARE\Policies\Google\Chrome",
                     r"SOFTWARE\Policies\Google"
                 ]
-
                 # Delete the value "3420" from each key
                 for key_path in key_paths[:2]:
                     error = delete_registry_value(key_path, "3420")
@@ -204,21 +205,14 @@ class App:
                         self.show_error("Erreur : impossible de supprimer les clés du registre\n"+str(error["error"][1]), "https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#impossible-dajouter-les-cl%C3%A9s-au-registre--impossible-de-supprimer-les-cl%C3%A9s-du-registre")
                         return
                     self.increase_progress()
-
                 # Delete empty keys
-##                for key_path in key_paths[2:]:
-##                    error = delete_registry_key_if_empty(key_path)
-##                    if error["error"][0]:
-##                        self.show_error("Erreur : impossible de supprimer les clés du registre\n"+str(error["error"][1]), "https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#impossible-dajouter-les-cl%C3%A9s-au-registre--impossible-de-supprimer-les-cl%C3%A9s-du-registre")
-##                        return
-##                    self.increase_progress()
+                for key_path in key_paths:
+                    error = delete_registry_key_if_empty(key_path)
+                    if error["error"][0]:
+                        self.show_error("Erreur : impossible de supprimer les clés du registre\n"+str(error["error"][1]), "https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#impossible-dajouter-les-cl%C3%A9s-au-registre--impossible-de-supprimer-les-cl%C3%A9s-du-registre")
+                        return
+                    self.increase_progress()
 
-##                for key_path in [r"SOFTWARE\Policies\Google\Chrome\ExtensionInstallAllowlist", r"SOFTWARE\Policies\Google\Chrome\ExtensionInstallWhitelist"]:
-##                    error = remove_registry_key(key_path, "3420")
-##                    if error["error"][0]:
-##                        self.show_error("Erreur : impossible de supprimer les clés du registre\n"+str(error["error"][1]), "https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#impossible-dajouter-les-cl%C3%A9s-au-registre--impossible-de-supprimer-les-cl%C3%A9s-du-registre")
-##                        return
-##                    self.increase_progress()
                 self.task_txt.set("Suppression : succès. Pour que les modifications soient\nappliquées, redémarrez Chrome en entrant 'chrome://restart'\ndans la barre d'adresse. Vos onglets seront réouverts.")
                 self.end_proc_ui()
             except Exception as e:
