@@ -25,6 +25,9 @@ class App:
         self.root.title("ItsBetter - Autoriser l'extension")
         self.root.geometry("400x200")
 ##        self.root.iconbitmap(r'itsbetter-icon-48.ico')
+        self.icon_base64 = 'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAARtSURBVFhHvZdrbFRFFMf/M/fubldoUdQ+BCyigIpAUkFNxQcxPgimKg/RmFQNkUSN8aPBhMQaI6HBrGiC+qVUE6OYQMWoKLQKiVaoKGCoCNEKpRY0DVBcurt39854Znb20d1L2S4uv+TuzJw7957/zD1zZpYhB7nnPZ9zOrwYki2TDLdQWc0YuLn9vyJ6dmGYAKdjXb0UbgsYm25MJUM5d//cnREQ6wg9LgU+oNHaxlQyUs4VWoDTsbZeCL6DMebT1hIien4g512mBVjqm7tRdxs5rzS2kpHrXMGdk+GlVE5LNs+D7TeV0SIh/sh3ruDg/FFTz2DZsGcuhHXt7cZAHWtugP+OFWBlFcZSKMo5ffMj+c4VannNTVYzsEAFeOVU8KtmUCO5Apl/DPWm+PQHdbswRnau4ELIalNPI4dOIrH/M32BlkZxnN+5gnNuhpiDGOiBPHPCtEZLYc4VLNYekqY+DH55LWTsLGR4QLet2jmwrpsHGf2X1LnapknEEN/XBsSj1KCUecU14NUqj3F69h+43V8jvucT3c8L7xTLLdizGmBNvdMYslATlnsZlEB7dgP4+Fp6B4mZMBP+hldR9mSL6ZFP5ulhUH6ilJj98lQ9ceALxDtbMlfXh3r0rKKKZqkOoncvhtbUIxK6F0Orb0X8m7cg+rv1s16cQ4AHStAIsOA49QtnWzMF8amkkYQ57SE4W19Ptj0oXMAIqNwu+n5JNpiVLAtk9AKyA5BIbSzu79/rtv/BVTppFcoFzUD2rib6DyDesQ68ajqCL3yJS1buRvC5T+FfsBLsskm6jxdFC8h2nsLpeBOR9Q9TcLZCnDgEUFz4KH0HX/yK0nq96TWcogR4OU8h+vbD+bwJ0Q2NiLwxH9HWpyl+GQKL1pC3/PgoXIBJyaL353M698I9vAOJfVvoM0ykpVpjrBkKF5CI60JGzugyFxYYQxnQO/hkPKJLVvwMSIry73TNvmmBLnOx5z2D4PNbYF1/j7EkYWXlsG+8n4QPQnjsLdaqxgdeMfUMlPWsyXN13hfHu/XGkujeCnva3To980tr9PbMqY894z64x/YCp47BrlsKX90isPJKMDq88MlzEHjoNfArpyC+8x16T6dxkIFFt4fcvGM3CfDf9SzE6b/gbHopvaup71j2xLvJc0IKkUDk7YUQfx/WSzCwuBl84ixzk6BsGO/cQBlybTqOUkjaNJWAPhIwwdjSqFG4h76Fe7DdWAwkjk+aTbveFFp3Q3r0cjBratX9KjrMkBgZC0Mc/UlPvxckoJ/Ftoc2Uwp/xNgMhe/nF0gbbdryY9NIc5GcqxnYyP2+wc1UPWhslGTo9HpxnP82NlC7ibP5TQkm2XKyOV7n9pIgEaVwfIo17UykN/mh9Usec3t/fJ/SZrGH/4KQFJoUqY3lq4/QOY1q2mo4+3LtbbRSWkv251TiV1fI5eOaj+4yluECFHLFzb7w+IElVF1GQigboei/52qdU3Gcnu+Skn00NnB1m5r25F0F8B+cyc1hqmvISAAAAABJRU5ErkJggg=='
+        self.icon = tk.PhotoImage(data=self.icon_base64)
+        self.root.iconphoto(True, self.icon)
         self.progress_txt = StringVar()
         self.progress_txt.set("0 %")
         self.task_txt = StringVar()
@@ -111,10 +114,18 @@ class App:
                                     folder_names.append(os.path.basename(folder_path))
             return folder_names
 
-        def add_registry_key(key_path, value_name, value_data):
+        def add_registry_value(key_path, value_name, value_data):
             try:
                 key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, winreg.KEY_SET_VALUE)
                 winreg.SetValueEx(key, value_name, 0, winreg.REG_SZ, value_data)
+                winreg.CloseKey(key)
+                return {"key_path": key_path, "error": (False, "")}
+            except Exception as e:
+                return {"key_path": key_path, "error": (True, e)}
+
+        def create_registry_key(key_path):
+            try:
+                key = winreg.CreateKey(winreg.HKEY_LOCAL_MACHINE, key_path)
                 winreg.CloseKey(key)
                 return {"key_path": key_path, "error": (False, "")}
             except Exception as e:
@@ -129,9 +140,12 @@ class App:
                     if itsbetter_id:
                         self.increase_progress()
                         for key_path in [r"SOFTWARE\Policies\Google\Chrome\ExtensionInstallAllowlist", r"SOFTWARE\Policies\Google\Chrome\ExtensionInstallWhitelist"]:
-                            error = add_registry_key(key_path, "3420", itsbetter_id[0])
-                            if error["error"][0]:
-                                self.show_error("Erreur : impossible d'ajouter les clés au registre\n"+str(error["error"][1]), "https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#impossible-dajouter-les-cl%C3%A9s-au-registre--impossible-de-supprimer-les-cl%C3%A9s-du-registre")
+                            self.error = []
+                            self.error.append(create_registry_key(key_path))
+                            self.error.append(add_registry_value(key_path, "3420", itsbetter_id[0]))
+                            print(self.error)
+                            if self.error[0]["error"][0] or self.error[1]["error"][0]:
+                                self.show_error("Erreur : impossible d'ajouter les clés au registre\n"+str(self.error[0]["error"][0])+"\n"+str(self.error[1]["error"][0]), "https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#impossible-dajouter-les-cl%C3%A9s-au-registre--impossible-de-supprimer-les-cl%C3%A9s-du-registre")
                                 return
                             self.increase_progress()
                         self.task_txt.set("Autorisation : succès. Pour que les modifications soient\nappliquées, redémarrez Chrome en entrant 'chrome://restart'\ndans la barre d'adresse. Vos onglets seront réouverts.")
@@ -148,7 +162,7 @@ class App:
         threading.Thread(target=start_proc).start()
 
     def unauthorize(self):
-        def remove_registry_key(key_path, value_name):
+        def delete_registry_value(key_path, value_name):
             try:
                 key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, winreg.KEY_SET_VALUE)
                 winreg.DeleteValue(key, value_name)
@@ -159,15 +173,52 @@ class App:
             except Exception as e:
                 return {"key_path": key_path, "error": (True, e)}
 
+        def delete_registry_key_if_empty(key_path):
+            try:
+                key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, winreg.KEY_READ)
+                # Checks if the key is empty
+                if winreg.QueryInfoKey(key)[1] == 0:
+                    print("coucou")
+                    winreg.DeleteKey(winreg.HKEY_LOCAL_MACHINE, key_path)
+                winreg.CloseKey(key)
+                return {"key_path": key_path, "error": (False, "")}
+            except FileNotFoundError:
+                return {"key_path": key_path, "error": (False, "")}
+            except OSError as e:
+                return {"key_path": key_path, "error": (True, e)}
+
         def start_proc():
             self.start_proc_ui(2)
             try:
-                for key_path in [r"SOFTWARE\Policies\Google\Chrome\ExtensionInstallAllowlist", r"SOFTWARE\Policies\Google\Chrome\ExtensionInstallWhitelist"]:
-                    error = remove_registry_key(key_path, "3420")
+                key_paths = [
+                    r"SOFTWARE\Policies\Google\Chrome\ExtensionInstallWhitelist",
+                    r"SOFTWARE\Policies\Google\Chrome\ExtensionInstallAllowlist",
+                    r"SOFTWARE\Policies\Google\Chrome",
+                    r"SOFTWARE\Policies\Google"
+                ]
+
+                # Delete the value "3420" from each key
+                for key_path in key_paths[:2]:
+                    error = delete_registry_value(key_path, "3420")
                     if error["error"][0]:
                         self.show_error("Erreur : impossible de supprimer les clés du registre\n"+str(error["error"][1]), "https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#impossible-dajouter-les-cl%C3%A9s-au-registre--impossible-de-supprimer-les-cl%C3%A9s-du-registre")
                         return
                     self.increase_progress()
+
+                # Delete empty keys
+##                for key_path in key_paths[2:]:
+##                    error = delete_registry_key_if_empty(key_path)
+##                    if error["error"][0]:
+##                        self.show_error("Erreur : impossible de supprimer les clés du registre\n"+str(error["error"][1]), "https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#impossible-dajouter-les-cl%C3%A9s-au-registre--impossible-de-supprimer-les-cl%C3%A9s-du-registre")
+##                        return
+##                    self.increase_progress()
+
+##                for key_path in [r"SOFTWARE\Policies\Google\Chrome\ExtensionInstallAllowlist", r"SOFTWARE\Policies\Google\Chrome\ExtensionInstallWhitelist"]:
+##                    error = remove_registry_key(key_path, "3420")
+##                    if error["error"][0]:
+##                        self.show_error("Erreur : impossible de supprimer les clés du registre\n"+str(error["error"][1]), "https://github.com/devmlb/itsbetter/wiki/Installation,-mise-%C3%A0-jour-et-d%C3%A9sinstallation#impossible-dajouter-les-cl%C3%A9s-au-registre--impossible-de-supprimer-les-cl%C3%A9s-du-registre")
+##                        return
+##                    self.increase_progress()
                 self.task_txt.set("Suppression : succès. Pour que les modifications soient\nappliquées, redémarrez Chrome en entrant 'chrome://restart'\ndans la barre d'adresse. Vos onglets seront réouverts.")
                 self.end_proc_ui()
             except Exception as e:
@@ -179,7 +230,6 @@ if is_admin():
     if __name__ == "__main__":
         root = tk.Tk()
         app = App(root)
-##        sv_ttk.use_light_theme()
         root.resizable(False, False)
         root.mainloop()
 else:
