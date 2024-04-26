@@ -35,4 +35,4 @@ Après avoir consulté la [documentation du fonctionnement de l'extension](https
 
 ### Soumettre les modifications
 
-Soumettez une pull request et attendez la réponse
+Partagez vos modificationa avec une pull request.
