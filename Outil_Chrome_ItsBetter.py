@@ -22,7 +22,7 @@ class App:
             sv_ttk.set_theme("dark")
         else:
             sv_ttk.set_theme("light")
-        self.root.title("ItsBetter - Autoriser l'extension")
+        self.root.title("ItsBetter - Autoriser l'extension (v"+VERSION+")")
         self.root.geometry("400x200")
 ##        self.root.iconbitmap(r'itsbetter-icon-48.ico')
         self.icon_base64 = 'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAARtSURBVFhHvZdrbFRFFMf/M/fubldoUdQ+BCyigIpAUkFNxQcxPgimKg/RmFQNkUSN8aPBhMQaI6HBrGiC+qVUE6OYQMWoKLQKiVaoKGCoCNEKpRY0DVBcurt39854Znb20d1L2S4uv+TuzJw7957/zD1zZpYhB7nnPZ9zOrwYki2TDLdQWc0YuLn9vyJ6dmGYAKdjXb0UbgsYm25MJUM5d//cnREQ6wg9LgU+oNHaxlQyUs4VWoDTsbZeCL6DMebT1hIien4g512mBVjqm7tRdxs5rzS2kpHrXMGdk+GlVE5LNs+D7TeV0SIh/sh3ruDg/FFTz2DZsGcuhHXt7cZAHWtugP+OFWBlFcZSKMo5ffMj+c4VannNTVYzsEAFeOVU8KtmUCO5Apl/DPWm+PQHdbswRnau4ELIalNPI4dOIrH/M32BlkZxnN+5gnNuhpiDGOiBPHPCtEZLYc4VLNYekqY+DH55LWTsLGR4QLet2jmwrpsHGf2X1LnapknEEN/XBsSj1KCUecU14NUqj3F69h+43V8jvucT3c8L7xTLLdizGmBNvdMYslATlnsZlEB7dgP4+Fp6B4mZMBP+hldR9mSL6ZFP5ulhUH6ilJj98lQ9ceALxDtbMlfXh3r0rKKKZqkOoncvhtbUIxK6F0Orb0X8m7cg+rv1s16cQ4AHStAIsOA49QtnWzMF8amkkYQ57SE4W19Ptj0oXMAIqNwu+n5JNpiVLAtk9AKyA5BIbSzu79/rtv/BVTppFcoFzUD2rib6DyDesQ68ajqCL3yJS1buRvC5T+FfsBLsskm6jxdFC8h2nsLpeBOR9Q9TcLZCnDgEUFz4KH0HX/yK0nq96TWcogR4OU8h+vbD+bwJ0Q2NiLwxH9HWpyl+GQKL1pC3/PgoXIBJyaL353M698I9vAOJfVvoM0ykpVpjrBkKF5CI60JGzugyFxYYQxnQO/hkPKJLVvwMSIry73TNvmmBLnOx5z2D4PNbYF1/j7EkYWXlsG+8n4QPQnjsLdaqxgdeMfUMlPWsyXN13hfHu/XGkujeCnva3To980tr9PbMqY894z64x/YCp47BrlsKX90isPJKMDq88MlzEHjoNfArpyC+8x16T6dxkIFFt4fcvGM3CfDf9SzE6b/gbHopvaup71j2xLvJc0IKkUDk7YUQfx/WSzCwuBl84ixzk6BsGO/cQBlybTqOUkjaNJWAPhIwwdjSqFG4h76Fe7DdWAwkjk+aTbveFFp3Q3r0cjBratX9KjrMkBgZC0Mc/UlPvxckoJ/Ftoc2Uwp/xNgMhe/nF0gbbdryY9NIc5GcqxnYyP2+wc1UPWhslGTo9HpxnP82NlC7ibP5TQkm2XKyOV7n9pIgEaVwfIo17UykN/mh9Usec3t/fJ/SZrGH/4KQFJoUqY3lq4/QOY1q2mo4+3LtbbRSWkv251TiV1fI5eOaj+4yluECFHLFzb7w+IElVF1GQigboei/52qdU3Gcnu+Skn00NnB1m5r25F0F8B+cyc1hqmvISAAAAABJRU5ErkJggg=='
@@ -222,6 +222,7 @@ class App:
 
 if is_admin():
     if __name__ == "__main__":
+        VERSION = "1.2.0"
         root = tk.Tk()
         app = App(root)
         root.resizable(False, False)
