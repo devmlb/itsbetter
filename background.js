@@ -62,11 +62,21 @@ function getModById(modId, modsList) {
     return null;
 }
 
-function injectedFunction() {
-    let metaTag = document.createElement("meta");
-    metaTag.setAttribute("http-equiv", "Content-Security-Policy");
-    metaTag.setAttribute("content", "font-src * 'unsafe-inline';");
-    document.head.appendChild(metaTag)
+// function injectedFunction() {
+//     let metaTag = document.createElement("meta");
+//     metaTag.setAttribute("http-equiv", "Content-Security-Policy");
+//     metaTag.setAttribute("content", "font-src * 'unsafe-inline';");
+//     document.head.appendChild(metaTag)
+// }
+
+function isChromium() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    return userAgent.includes('chrome') || userAgent.includes('chromium');
+}
+
+function isFirefox() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    return userAgent.includes('firefox');
 }
 
 function injectContent(modsInfo, requiredContent, url, tabId, frameId) {
@@ -77,25 +87,49 @@ function injectContent(modsInfo, requiredContent, url, tabId, frameId) {
             if (requiredContent[key] && key !== "active-extension" && key !== "updated") {
                 const tempMod = getModById(key, modsInfo);
                 // TODO: implement verification of the URLs supplied for each mod
-                if (tempMod.frame == "all") {
-                    for (const fileName of tempMod.files) {
-                        if (fileName.includes("css")) {
-                            CSSfilesToAdd.push(fileName);
-                        } else if (fileName.includes("js")) {
-                            JSfilesToAdd.push(fileName);
-                        }
-                    }
-                } else if (tempMod.frame == "main") {
-                    if (frameId === 0) {
-                        for (const fileName of tempMod.files) {
+                if (isChromium()) {
+                    if (tempMod.frame == "all") {
+                        for (const fileName of tempMod["chromium-files"]) {
                             if (fileName.includes("css")) {
                                 CSSfilesToAdd.push(fileName);
                             } else if (fileName.includes("js")) {
                                 JSfilesToAdd.push(fileName);
                             }
                         }
-                    } else {
-                        console.log("Skipping injection of '"+tempMod.id+"' in tab with id '"+tabId+"' in frame with id '"+frameId+"' because 'frame' is set to 'main' in 'available-mods.json'")
+                    } else if (tempMod.frame == "main") {
+                        if (frameId === 0) {
+                            for (const fileName of tempMod["chromium-files"]) {
+                                if (fileName.includes("css")) {
+                                    CSSfilesToAdd.push(fileName);
+                                } else if (fileName.includes("js")) {
+                                    JSfilesToAdd.push(fileName);
+                                }
+                            }
+                        } else {
+                            console.log("Skipping injection of '"+tempMod.id+"' in tab with id '"+tabId+"' in frame with id '"+frameId+"' because 'frame' is set to 'main' in 'available-mods.json'")
+                        }
+                    }
+                } else if (isFirefox()) {
+                    if (tempMod.frame == "all") {
+                        for (const fileName of tempMod["firefox-files"]) {
+                            if (fileName.includes("css")) {
+                                CSSfilesToAdd.push(fileName);
+                            } else if (fileName.includes("js")) {
+                                JSfilesToAdd.push(fileName);
+                            }
+                        }
+                    } else if (tempMod.frame == "main") {
+                        if (frameId === 0) {
+                            for (const fileName of tempMod["firefox-files"]) {
+                                if (fileName.includes("css")) {
+                                    CSSfilesToAdd.push(fileName);
+                                } else if (fileName.includes("js")) {
+                                    JSfilesToAdd.push(fileName);
+                                }
+                            }
+                        } else {
+                            console.log("Skipping injection of '"+tempMod.id+"' in tab with id '"+tabId+"' in frame with id '"+frameId+"' because 'frame' is set to 'main' in 'available-mods.json'")
+                        }
                     }
                 }
             } else if (key == "updated" && requiredContent[key]) {
@@ -107,11 +141,6 @@ function injectContent(modsInfo, requiredContent, url, tabId, frameId) {
             }
         }
     }
-      
-    // chrome.scripting.executeScript({
-    //     target: { tabId: tabId, frameIds: [frameId] },
-    //     func : injectedFunction,
-    // });
 
     if (CSSfilesToAdd.length > 0) {
         console.log("Injecting CSS files '"+CSSfilesToAdd+"' in tab with id '"+tabId+"' in frame with id '"+frameId+"'")

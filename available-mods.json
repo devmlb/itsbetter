@@ -5,7 +5,8 @@
         "desc": "Transforme le menu personnel en menu flottant et unifie son apparence",
         "frame": "main",
         "default-state": true,
-        "files": ["/mods/float-perso-menu.css"],
+        "chromium-files": ["/mods/float-perso-menu/float-perso-menu.css"],
+        "firefox-files": ["/mods/float-perso-menu/float-perso-menu.css"],
         "matches": ["https://*.itslearning.com/*"],
         "version": "v1.0",
         "hidden": false
@@ -16,7 +17,8 @@
         "desc": "Remplace les icônes diverses par des icônes Material Design",
         "frame": "all",
         "default-state": true,
-        "files": ["/mods/material-icons.css", "/mods/material-icons.js"],
+        "chromium-files": ["/mods/material-icons/material-icons-chromium.css", "/mods/material-icons/material-icons.js"],
+        "firefox-files": ["/mods/material-icons/material-icons-firefox.css", "/mods/material-icons/material-icons.js"],
         "matches": ["https://*.itslearning.com/*"],
         "version": "beta",
         "hidden": false
@@ -27,7 +29,8 @@
         "desc": "Améliore l'apparence du contenu de l'onglet accueil",
         "frame": "all",
         "default-state": true,
-        "files": ["/mods/home-layout.css"],
+        "chromium-files": ["/mods/home-layout/home-layout.css"],
+        "firefox-files": ["/mods/home-layout/home-layout.css"],
         "matches": ["https://*.itslearning.com/*"],
         "version": "beta",
         "hidden": false
@@ -38,7 +41,8 @@
         "desc": "Améliore l'apparence de la navbar et des menus flottants associés",
         "frame": "main",
         "default-state": true,
-        "files": ["/mods/navbar.css", "/mods/navbar.js"],
+        "chromium-files": ["/mods/navbar/navbar.css", "/mods/navbar/navbar.js"],
+        "firefox-files": ["/mods/navbar/navbar.css", "/mods/navbar/navbar.js"],
         "matches": ["https://*.itslearning.com/*"],
         "version": "v1.0",
         "hidden": false
@@ -49,18 +53,20 @@
         "desc": "Transforme le menu de notifications en menu flottant et unifie son apparence",
         "frame": "main",
         "default-state": false,
-        "files": ["/mods/float-notif-menu.css"],
+        "chromium-files": ["/mods/float-notif-menu/float-notif-menu.css"],
+        "firefox-files": ["/mods/float-notif-menu/float-notif-menu.css"],
         "matches": ["https://*.itslearning.com/*"],
         "version": "beta",
         "hidden": false
     },
     {
-        "id": "mod-material-icons-res",
+        "id": "mod-material-icons-font",
         "title": "",
         "desc": "Ajoute automatiquement la feuille CSS pour la police Material",
         "frame": "all",
         "default-state": true,
-        "files": ["/mods/material-icons-res.css"],
+        "chromium-files": ["/mods/material-icons-font/material-icons-font-chromium.css"],
+        "firefox-files": ["/mods/material-icons-font/material-icons-font-firefox.css"],
         "matches": ["https://*.itslearning.com/*"],
         "version": "v1.0",
         "hidden": true
