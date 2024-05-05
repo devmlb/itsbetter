@@ -1,8 +1,9 @@
 {
-    "latest-version": "1.1.0",
+    "latest-version": "1.2.0",
     "new-features": [
-        "Ajout d'un système de mise à jour",
-        "Nettoyage du code",
-        "Ajout du support de Firefox"
+        "Mod pour la navbar amélioré pour proposer une nouvelle apparence",
+        "Mod pour le menu de notification en version stable",
+        "Restructuration de l'extension pour améliorer la prise en charge différenciée de Firefox et des navigateurs basés sur Chromium",
+        "Correction de bugs"
     ]
 }
