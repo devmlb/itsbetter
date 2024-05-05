@@ -44,7 +44,7 @@
         "chromium-files": ["/mods/navbar/navbar.css", "/mods/navbar/navbar.js"],
         "firefox-files": ["/mods/navbar/navbar.css", "/mods/navbar/navbar.js"],
         "matches": ["https://*.itslearning.com/*"],
-        "version": "v1.0",
+        "version": "v1.2",
         "hidden": false
     },
     {
@@ -56,7 +56,7 @@
         "chromium-files": ["/mods/float-notif-menu/float-notif-menu.css"],
         "firefox-files": ["/mods/float-notif-menu/float-notif-menu.css"],
         "matches": ["https://*.itslearning.com/*"],
-        "version": "beta",
+        "version": "v1.0",
         "hidden": false
     },
     {
