@@ -19,6 +19,10 @@ function checkUpdates() {
                 updateCard.addEventListener("click", function() {
                     window.open('https://github.com/devmlb/itsbetter/releases/latest', '_blank').focus();
                 });
+                console.log('Update available! (v'+currentManifestVersion+" > v"+latestVersion+")");
+                chrome.action.setBadgeText({ text: "!" });
+                chrome.action.setBadgeTextColor({ color: [255, 255, 255, 255] });
+                chrome.action.setBadgeBackgroundColor({ color: [186, 26, 26, 255] });
             }
         });
 }

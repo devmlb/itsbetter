@@ -196,9 +196,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
             const currentManifestVersion = chrome.runtime.getManifest().version
             if (latestVersion != currentManifestVersion) {
                 console.log('Update available! (v'+currentManifestVersion+" > v"+latestVersion+")");
-                chrome.action.setBadgeText({ text: " " })
-                chrome.action.setBadgeTextColor({ color: [255, 255, 255, 255] })
-                chrome.action.setBadgeBackgroundColor({ color: [186, 26, 26, 255] })
+                chrome.action.setBadgeText({ text: "!" });
+                chrome.action.setBadgeTextColor({ color: [255, 255, 255, 255] });
+                chrome.action.setBadgeBackgroundColor({ color: [186, 26, 26, 255] });
             }
         })
         .catch(error => {
