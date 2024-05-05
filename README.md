@@ -5,6 +5,6 @@ Cette branche, déployée grâce à Github Pages, joue en quelque sorte le rôle
 ### Procédure à suivre à chaque nouvelle publication
 
 1. Mettre à jour la version dans `manifest.json`
-2. Compiler le fichier `itsbetter.crx`
+2. Compiler le fichier `itsbetter.crx` et `itsbetter.xpi`
 3. Publier une nouvelle release avec le résumé des modifications et les liens pour l'installation et la mise à jour
 4. Mettre à jour la version dans `release.json` et ajouter le résumé des modifications
