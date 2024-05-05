@@ -139,10 +139,6 @@ fetch("https://devmlb.github.io/itsbetter/release.json").then(function (response
     body.appendChild(div);
 });
 
-
-
-
-
 // iframe.onload()
 
 // iframe.addEventListener("DOMContentLoaded", function () {
