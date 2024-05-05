@@ -38,6 +38,7 @@ ul.l-personal-menu-dd {
 .l-personal-menu-dd .l-dropdown-menu-item>a {
     margin: 0px 10px !important;
     padding-left: 8% !important;
+    transition-duration: .3s !important;
 }
 a.l-personal-menu-dd-header--button:link>span, a.l-personal-menu-dd-header--button:active>span, a.l-personal-menu-dd-header--button:visited>span {
     color: #565656 !important;

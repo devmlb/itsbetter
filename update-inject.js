@@ -132,7 +132,7 @@ fetch("https://devmlb.github.io/itsbetter/release.json").then(function (response
     // iframe.setAttribute('id', "itsbetter-update-msg");
     iframe.setAttribute('style', "border-style: none; width: 100vw; height: 100vh;");
     let div = document.createElement("div");
-    div.setAttribute('style', "position: fixed; bottom: 0px; right: 0px; background-color: rgba(0, 0, 0, .3);");
+    div.setAttribute('style', "z-index: 999; position: fixed; bottom: 0px; right: 0px; background-color: rgba(0, 0, 0, .3);");
     div.appendChild(iframe);
     div.setAttribute('id', 'itsbetter-update-msg');
     const body = document.querySelector('body');

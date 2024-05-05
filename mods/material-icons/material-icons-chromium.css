@@ -4,9 +4,9 @@
     filter: invert(98%) sepia(18%) saturate(700%) hue-rotate(257deg) brightness(87%) contrast(90%);
 }
 /* Replaces Notification Icon */
-.h-va-middle.l-personal-menu-icon-notifications.l-menu-icons {
+#Notification>img {
     background-image: url('chrome-extension://__MSG_@@extension_id__/mods/material-icons-round-svg/notifications_black_24dp.svg') !important;
-    filter: invert(98%) sepia(100%) saturate(0%) hue-rotate(42deg) brightness(105%) contrast(103%) !important;
+    filter: invert(98%) sepia(100%) saturate(0%) hue-rotate(42deg) brightness(105%) contrast(103%);
 }
 
 /* Replaces Personnal Menu Files Icon */
@@ -73,4 +73,7 @@ a.l-personal-menu-dd-header--button:hover>span.l-personal-menu-icon-edit {
 }
 .l-topmenu-searchbox .ccl-searchtextbox-personalmenu-icon {
     filter: invert(46%) sepia(13%) saturate(11%) hue-rotate(322deg) brightness(96%) contrast(93%);
+}
+.itsl-personal-notifications__overlay__title {
+    background: url('chrome-extension://__MSG_@@extension_id__/mods/material-icons-round-svg/notifications_black_24dp.svg') no-repeat 0 !important;
 }
