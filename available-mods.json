@@ -52,7 +52,7 @@
         "title": "Menu de notifications flottant",
         "desc": "Transforme le menu de notifications en menu flottant et unifie son apparence",
         "frame": "main",
-        "default-state": false,
+        "default-state": true,
         "chromium-files": ["/mods/float-notif-menu/float-notif-menu.css"],
         "firefox-files": ["/mods/float-notif-menu/float-notif-menu.css"],
         "matches": ["https://*.itslearning.com/*"],
