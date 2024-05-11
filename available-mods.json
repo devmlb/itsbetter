@@ -70,5 +70,17 @@
         "matches": ["https://*.itslearning.com/*"],
         "version": "v1.0",
         "hidden": true
+    },
+    {
+        "id": "mod-revamped-home",
+        "title": "Accueil repensé",
+        "desc": "Réorganise la page d'accueil pour une meilleure practicitée",
+        "frame": "all",
+        "default-state": false,
+        "chromium-files": ["/mods/revamped-home/revamped-home.css", "/mods/revamped-home/revamped-home.js"],
+        "firefox-files": ["/mods/revamped-home/revamped-home.css", "/mods/revamped-home/revamped-home.js"],
+        "matches": ["https://*.itslearning.com/*"],
+        "version": "alpha",
+        "hidden": false
     }
 ]
