@@ -79,11 +79,10 @@
                 { name: "Calendrier", icon: "event", element: iframePersonal.contentDocument.querySelector(".itsl-cb-activities")}
             ]
 
-            const observer = new MutationObserver(updateTabContent)
-
             for (const tab of tabs) {
                 const tabElement = document.createElement("span")
                 tabElement.classList.add("revampedHome--navbar--tab")
+                tabElement.setAttribute("tabindex", 0)
                 tabElement.innerHTML = `<span class="revampedHome--navbar--tab--icon material-icons-round">${tab.icon}</span> ${tab.name}`
                 tabElement.addEventListener("click", () => changeTab(tab))
                 tabsDiv.appendChild(tabElement)
@@ -93,22 +92,15 @@
             const tabContent = content.appendChild(document.createElement("div"))
 
             function changeTab(tab) {
-                console.log(tabs)
                 const selectedTab = tabs.find(t => t.selected)
                 if (selectedTab) {
-                    observer.disconnect()
                     delete selectedTab.selected
                     selectedTab.navbarElement.classList.remove("tab__selected")
                 }
                 tab.selected = true
-                observer.observe(tab.element, { childList: true, subtree: true })
+                tabContent.innerHTML = ""
+                tabContent.appendChild(tab.element)
                 tab.navbarElement.classList.add("tab__selected")
-                updateTabContent()
-            }
-
-            function updateTabContent() {
-                const tab = tabs.find(tab => tab.selected)
-                tabContent.innerHTML = tab.element.innerHTML
             }
 
             changeTab(tabs[0])

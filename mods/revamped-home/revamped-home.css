@@ -25,21 +25,19 @@
     align-items: center;
     gap: 5px;
     cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 10px;
+    padding: 5px 15px;
+    border-radius: 999px;
     border: none;
     background: none;
 }
-.revampedHome--navbar--tab:hover, .tab__selected {
-    background: #534f69;
-}
+.revampedHome--navbar--tab:hover, .tab__selected { background: #645f7e; }
 
 .revampedHome--navbar--tab--icon {
     color: #dbdbdb;
 }
 
 .revampedHome--navbar--link {
-    border-radius: 10px;
+    padding: 5px 15px;
     display: flex;
     align-items: center;
     gap: 10px;
