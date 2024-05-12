@@ -74,7 +74,7 @@
     {
         "id": "mod-revamped-home",
         "title": "Accueil repensé",
-        "desc": "Réorganise la page d'accueil pour une meilleure practicité",
+        "desc": "Réorganise la page d'accueil pour une meilleure praticité",
         "frame": "all",
         "default-state": false,
         "chromium-files": ["/mods/revamped-home/revamped-home.css", "/mods/revamped-home/revamped-home.js"],
