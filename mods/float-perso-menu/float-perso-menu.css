@@ -1,3 +1,4 @@
+
 /* Replaces Personnal Menu color and shape */
 ul.l-personal-menu-dd {
     background: none repeat scroll 0 0 #fff !important;
@@ -18,8 +19,8 @@ ul.l-personal-menu-dd {
 .l-dropdown-menu-item [class*="l-personal-menu-icon"] {
     filter: invert(24%) sepia(6%) saturate(2%) hue-rotate(328deg) brightness(108%) contrast(87%) !important;
 }
-.l-topmenu-searchbox .ccl-searchtextbox-personalmenu-icon {
-    filter: invert(36%) sepia(6%) saturate(5%) hue-rotate(323deg) brightness(87%) contrast(92%) !important;
+.l-topmenu-searchbox {
+    display: none !important;
 }
 .l-personal-menu-dd-header--details {
     color: #565656 !important;
