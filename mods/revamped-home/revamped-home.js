@@ -1,4 +1,10 @@
-(function() {
+async function apiCall(endpoint, method="GET", headers=undefined) {
+    if (headers === undefined) headers = {};
+    const response = await fetch("https://elyco.itslearning.com/restapi/" + endpoint, { method: method, headers: { ...headers, Cookie: document.cookie } });
+    return await response.json();
+}
+
+(async function() {
     if (window.location.host !== "elyco.itslearning.com") return
     if (window.location.pathname !== "/DashboardMenu.aspx") return
     const urlParams = new URLSearchParams(window.location.search)
@@ -9,8 +15,9 @@
         const mainElement = document.querySelector("main")
 
         const iframeDashboard = document.createElement("iframe")
-        // TODO: Get the location ID
-        iframeDashboard.src = "/Dashboard/Dashboard.aspx?LocationID=233&LocationType=Hierarchy"
+
+        const hierarchy = await apiCall("personal/hierarchies/default/v1")
+        iframeDashboard.src = `/Dashboard/Dashboard.aspx?LocationID=${hierarchy.HierarchyId}&LocationType=Hierarchy`
         iframeDashboard.style.display = "none"
         mainElement.insertBefore(iframeDashboard, mainElement.querySelector("*"))
         
@@ -18,7 +25,6 @@
         iframePersonal.style.display = "none"
 
         const loadedComponents = []
-
 
         iframeDashboard.addEventListener("load", () => composePage(iframeDashboard))
         iframePersonal.addEventListener("load", () => composePage(iframePersonal))
@@ -28,11 +34,11 @@
             if (loadedComponents.length !== 2) return
 
             const content = mainElement.appendChild(document.createElement("div"))
-            content.classList.add("revampedHome--content")
+            content.classList.add("rh--content")
             content.innerHTML = `
-                <nav class="revampedHome--navbar">
-                    <div class="revampedHome--navbar--part" id="rh--nav--tabs"></div>
-                    <div class="revampedHome--navbar--part" id="rh--nav--external"></div>
+                <nav class="rh--navbar">
+                    <div class="rh--navbar--part" id="rh--nav--tabs"></div>
+                    <div class="rh--navbar--part" id="rh--nav--external"></div>
                 </nav>
             `
 
@@ -55,41 +61,100 @@
                 const association = associations.find(association => association.regex.test(link.href))
                 const linkElement = document.createElement("a")
                 linkElement.href = link.href
+                const hostname = new URL(link.href).hostname
                 linkElement.target = "_blank"
-                linkElement.classList.add("revampedHome--navbar--link")
+                linkElement.classList.add("rh--navbar--tab")
                 linkElement.innerHTML = association ? `
-                    <span class="revampedHome--navbar--link--icon">
-                        <img class="revampedHome--navbar--link--image" src="${association.icon}" alt="">
-                        <span class="revampedHome--navbar--link--action material-icons-round">open_in_new</span>
-                    </span>
-                    <span class="revampedHome--navbar--link--label">${association.name}</span>` : `
-                    <span class="revampedHome--navbar--link--icon">
-                        <span class="revampedHome--navbar--link--image material-icons-round icon__undefined">link</span>
-                        <span class="revampedHome--navbar--link--action material-icons-round">open_in_new</span>
-                    </span>
-                    <span class="revampedHome--navbar--link--label">${link.href}</span>`
+                    <img class="rh--navbar--tab--icon" src="${association.icon}" alt="" />${association.name}` : `
+                    <span class="rh--navbar--tab--icon material-icons-round icon__undefined">link</span>${hostname}`
                 links.push({ html: linkElement, association })
             }
             for (const link of links.sort((a) => a.association ? -1 : 1))
                 externalDiv.appendChild(link.html)
 
             const tabs = [
-                { name: "Tâches", icon: "task", element: iframePersonal.contentDocument.querySelector(".itsl-cb-tasks") },
-                { name: "Actualités", icon: "newspaper", element: iframePersonal.contentDocument.querySelector(".itsl-cb-stream") },
-                { name: "Calendrier", icon: "event", element: iframePersonal.contentDocument.querySelector(".itsl-cb-activities")}
+                { id: "tasks", name: "Tâches", icon: "task", element: iframePersonal.contentDocument.querySelector(".itsl-cb-tasks") },
+                { id: "news", name: "Actualités", icon: "newspaper", element: iframePersonal.contentDocument.querySelector(".itsl-cb-stream") },
+                { id: "calendar", name: "Calendrier", icon: "event", element: iframePersonal.contentDocument.querySelector(".itsl-cb-activities")}
             ]
 
             for (const tab of tabs) {
                 const tabElement = document.createElement("span")
-                tabElement.classList.add("revampedHome--navbar--tab")
+                tabElement.classList.add("rh--navbar--tab")
                 tabElement.setAttribute("tabindex", 0)
-                tabElement.innerHTML = `<span class="revampedHome--navbar--tab--icon material-icons-round">${tab.icon}</span> ${tab.name}`
+                tabElement.innerHTML = `<span class="rh--navbar--tab--icon material-icons-round">${tab.icon}</span> ${tab.name}`
                 tabElement.addEventListener("click", () => changeTab(tab))
                 tabsDiv.appendChild(tabElement)
                 tab.navbarElement = tabElement
             }
+            
+            for (const liElement of tabs[1].element.querySelectorAll("li.h-position-r")) {
+                if (liElement.classList.contains("itsl-cb-stream-item-lightbulletin")) {
+                    const author = liElement.querySelector(".itsl-notifications-person").innerText
+                    const course = liElement.querySelector("a span").innerText
+                    let date = liElement.querySelector(".itsl-cb-stream-item-timestamp span").innerText
+                    date = date.charAt(0).toUpperCase() + date.slice(1)
+                    const message = liElement.querySelector(".itsl-light-bulletins-list-item-text").innerText
+                    const element = document.createElement("li")
+                    element.classList.add("rh--news")
+                    element.innerHTML = `
+                    <div class="rh--news--content">
+                        <span class="rh--news--course">${course}</span>
+                        <div>
+                            <p class="rh--news--paragraph">Un nouveau message a été publié à ce cours.</p>
+                            <span class="rh--news--date">${date}</span>
+                        </div>
+                        <span class="rh--news--author">
+                            <span class="material-icons-round">account_circle</span>
+                            ${author}
+                        </span>
+                    </div>
+                    <div class="rh--news--message">${message}</div>`
+                    liElement.replaceWith(element)
+                } else {
+                    const author = liElement.querySelector(".itsl-notifications-person").innerText
+                    const course = liElement.querySelector(".itsl-notifications-location-title").innerText
+                    let date = liElement.querySelector(".itsl-cb-stream-item-timestamp span").innerText
+                    date = date.charAt(0).toUpperCase() + date.slice(1)
+                    const elements = []
+                    for (const aElement of tabs[1].element.querySelectorAll("img + a")) {
+                        const imgElement = aElement.previousElementSibling
+                        const element = { name: aElement.innerText, icon: imgElement.src, link: aElement.href }
+                        elements.push(element)
+                    }
+                    let more = liElement.querySelector("a[onclick]") === null ? false : true
+                    const element = document.createElement("li")
+                    element.classList.add("rh--news")
+                    element.innerHTML = `
+                        <div class="rh--news--content">
+                            <span class="rh--news--course">${course}</span>
+                            <div>
+                                <p class="rh--news--paragraph">Du contenu a été ajouté à ce cours.</p>
+                                <span class="rh--news--date">${date}</span>
+                            </div>
+                            <span class="rh--news--author">
+                                <span class="material-icons-round">account_circle</span>
+                                ${author}
+                            </span>
+                        </div>
+                        <div class="rh--news--elements">
+                            ${elements.map(element => `
+                                <a class="rh--news--element" href="${element.link}">
+                                    <img class="rh--news--element--icon" src="${element.icon}" alt="">
+                                    <span class="rh--news--element--name">${element.name}</span>
+                                </a>`).join("")}
+                            ${more ? `<a class="rh--news--element" href="#">
+                                <span class="rh--news--element--icon material-icons-round">more_horiz</span>
+                                <span class="rh--news--element--name">Voir tous les éléments</span>
+                            </a>` : ""}
+                        </div>`
+                    liElement.replaceWith(element)
+                }
+            }
 
-            const tabContent = content.appendChild(document.createElement("div"))
+            const tabDisplay = document.createElement("div")
+            tabDisplay.classList.add("rh--tabDisplay")
+            content.appendChild(tabDisplay)
 
             function changeTab(tab) {
                 const selectedTab = tabs.find(t => t.selected)
@@ -98,12 +163,14 @@
                     selectedTab.navbarElement.classList.remove("tab__selected")
                 }
                 tab.selected = true
-                tabContent.innerHTML = ""
-                tabContent.appendChild(tab.element)
+                tabDisplay.innerHTML = ""
+                tabDisplay.appendChild(tab.element)
+                tabDisplay.setAttribute("tabId", tab.id)
                 tab.navbarElement.classList.add("tab__selected")
             }
 
-            changeTab(tabs[0])
+            // TODO: Change back to tabs[0] (changed for testing purposes)
+            changeTab(tabs[1])
 
         }
     }
