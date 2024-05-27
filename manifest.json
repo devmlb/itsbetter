@@ -4,7 +4,6 @@
     "version": "1.2.0",
     "description": "Improve your Itslearning experience",
     "permissions": [
-        "activeTab",
         "storage",
         "scripting",
         "tabs",
@@ -24,7 +23,7 @@
     "web_accessible_resources": [
         {
         "resources": ["/mods/*", "update.html", "/mdui/*", "/icons/*", "https://devmlb.github.io/itsbetter/*"],
-        "matches": ["<all_urls>"]
+        "matches": ["https://*.itslearning.com/*"]
         }
     ],
     "background": {
@@ -32,8 +31,7 @@
         "scripts": ["background.js"]
     },
     "host_permissions": [
-        "http://*/*",
-        "https://*/*"
+        "https://*.itslearning.com/*"
     ],
     "browser_specific_settings": {
         "gecko": {
