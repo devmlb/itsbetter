@@ -9,6 +9,24 @@
     filter: invert(98%) sepia(100%) saturate(0%) hue-rotate(42deg) brightness(105%) contrast(103%);
 }
 
+/* Replaces Mail Icon */
+#ctl00_PersonalResponsiveMenu_EmailInboxLink_image {
+    background-image: url('moz-extension://__MSG_@@extension_id__/mods/material-icons-round-svg/mail_24dp.svg') !important;
+    filter: invert(98%) sepia(100%) saturate(0%) hue-rotate(42deg) brightness(105%) contrast(103%);
+}
+
+/* Replaces Chat Icon */
+#im2-open-button>img {
+    background-image: url('moz-extension://__MSG_@@extension_id__/mods/material-icons-round-svg/chat_bubble_24dp.svg') !important;
+    filter: invert(98%) sepia(100%) saturate(0%) hue-rotate(42deg) brightness(105%) contrast(103%);
+}
+#im2-open-button>svg {
+    display: none !important;
+}
+#im2-open-button {
+    padding: 5px !important;
+}
+
 /* Replaces Personnal Menu Files Icon */
 .l-personal-menu-icon.l-personal-menu-icon-yourfiles {
     background-image: url('moz-extension://__MSG_@@extension_id__/mods/material-icons-round-svg/folder_black_24dp.svg') !important;

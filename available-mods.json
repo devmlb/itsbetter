@@ -17,8 +17,8 @@
         "desc": "Remplace les icônes diverses par des icônes Material Design",
         "frame": "all",
         "default-state": true,
-        "chromium-files": ["/mods/material-icons/material-icons-chromium.css"],
-        "firefox-files": ["/mods/material-icons/material-icons-firefox.css"],
+        "chromium-files": ["/mods/material-icons/material-icons-chromium.css", "/mods/material-icons/material-icons.js"],
+        "firefox-files": ["/mods/material-icons/material-icons-firefox.css", "/mods/material-icons/material-icons.js"],
         "matches": ["https://*.itslearning.com/*"],
         "version": "beta",
         "hidden": false

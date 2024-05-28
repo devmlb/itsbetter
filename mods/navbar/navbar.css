@@ -71,6 +71,7 @@ ul.l-main-menu-items>li.l-menu-itslearning .l-menu-text {
     border: none !important;
     padding: 0px !important;
     color: #fff !important;
+    text-align: center !important;
 }
 .l-personal-menu-name>span.h-va-middle {
     display: none;
