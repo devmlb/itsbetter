@@ -79,10 +79,6 @@ let html = `
         closeButton.addEventListener("click", function() {
             window.top.postMessage('close', '*');
         });
-        // openSettingsButton = document.getElementById("open-settings-btn");
-        // openSettingsButton.addEventListener("click", function() {
-        //     window.top.postMessage('open-settings', '*');
-        // });
     });
     </script>
 </head>
@@ -102,7 +98,6 @@ let html = `
             </ul>
             <div style="display: flex; width: auto; align-items: center; justify-content: right;">
                 <mdui-button id="close-btn" style="margin-right: 5px;">Fermer</mdui-button>
-                <!-- <mdui-button id="open-settings-btn" style="margin-left: 5px;" end-icon="open_in_new--rounded">Ouvrir les paramètres</mdui-button> -->
             </div>
         </div>
     </mdui-card>
@@ -122,11 +117,11 @@ fetch("https://devmlb.github.io/itsbetter/release.json").then(function (response
     html = html.replace("%new-features%", newFeaturesList);
     html = html.replace("%version%", chrome.runtime.getManifest().version);
 
-    html = html.replace("%mdui-css%", chrome.runtime.getURL("mdui/mdui.css"));
-    html = html.replace("%mdui-js%", chrome.runtime.getURL("mdui/mdui.global.js"));
-    html = html.replace("%material-icons-css%", chrome.runtime.getURL("mdui/material-icons-round.css"));
-    html = html.replace("%roboto-css%", chrome.runtime.getURL("mdui/roboto.css"));
-    html = html.replace("%itsbetter-icon%", chrome.runtime.getURL("icons/itsbetter-icon-128.png"));
+    html = html.replace("%mdui-css%", chrome.runtime.getURL("/mdui/mdui.css"));
+    html = html.replace("%mdui-js%", chrome.runtime.getURL("/mdui/mdui.global.js"));
+    html = html.replace("%material-icons-css%", chrome.runtime.getURL("/mdui/material-icons-round.css"));
+    html = html.replace("%roboto-css%", chrome.runtime.getURL("/mdui/roboto.css"));
+    html = html.replace("%itsbetter-icon%", chrome.runtime.getURL("/internal/icons/itsbetter-icon-128.png"));
 
     iframe.setAttribute('srcdoc', html)
     // iframe.setAttribute('id', "itsbetter-update-msg");

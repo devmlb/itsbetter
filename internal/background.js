@@ -39,7 +39,7 @@ function initStorageKeys(requiredSettings) {
 };
 
 function checkSettingsStorage(previousReleaseVersion, currentReleaseVersion) {
-    fetch(chrome.runtime.getURL("available-mods.json")).then(function (response) {
+    fetch(chrome.runtime.getURL("/available-mods.json")).then(function (response) {
         return response.json();
     }).then(function (data) {
         let settings = getModsAndDefault(data);
@@ -61,13 +61,6 @@ function getModById(modId, modsList) {
     }
     return null;
 }
-
-// function injectedFunction() {
-//     let metaTag = document.createElement("meta");
-//     metaTag.setAttribute("http-equiv", "Content-Security-Policy");
-//     metaTag.setAttribute("content", "font-src * 'unsafe-inline';");
-//     document.head.appendChild(metaTag)
-// }
 
 function isChromium() {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -134,7 +127,7 @@ function injectContent(modsInfo, requiredContent, url, tabId, frameId) {
                 }
             } else if (key == "updated" && requiredContent[key]) {
                 if (frameId === 0) {
-                    JSfilesToAdd.push("update-inject.js");
+                    JSfilesToAdd.push("/internal/update-inject.js");
                     chrome.storage.sync.set({ updated: false });
                     console.log('Adding injection of update message')
                 }
@@ -158,15 +151,11 @@ function injectContent(modsInfo, requiredContent, url, tabId, frameId) {
     }
 }
 
-function isFirefox() {
-    return navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-}
-
 // Injects mods when new frame with Itslearning's URL is requested
 chrome.webNavigation.onCommitted.addListener(function (details) {
     if (details.url != undefined) {
         if (details.url.includes("itslearning")) {
-            fetch(chrome.runtime.getURL("available-mods.json")).then(function (response) {
+            fetch(chrome.runtime.getURL("/available-mods.json")).then(function (response) {
                 return response.json();
             }).then(function (data) {
                 chrome.storage.sync.get(null, function (localSettings) {
