@@ -12,23 +12,23 @@
     ],
     "action": {
         "default_title": "ItsBetter",
-        "default_popup": "popup.html"
+        "default_popup": "/internal/popup.html"
     },
     "icons": {
-        "16": "icons/itsbetter-icon-16.png",
-        "32": "icons/itsbetter-icon-32.png",
-        "48": "icons/itsbetter-icon-48.png",
-        "128": "icons/itsbetter-icon-128.png"
+        "16": "/internal/icons/itsbetter-icon-16.png",
+        "32": "/internal/icons/itsbetter-icon-32.png",
+        "48": "/internal/icons/itsbetter-icon-48.png",
+        "128": "/internal/icons/itsbetter-icon-128.png"
     },
     "web_accessible_resources": [
         {
-        "resources": ["/mods/*", "update.html", "/mdui/*", "/icons/*", "https://devmlb.github.io/itsbetter/*"],
+        "resources": ["/mods/*", "/internal/*", "/mdui/*", "https://devmlb.github.io/itsbetter/*"],
         "matches": ["https://*.itslearning.com/*"]
         }
     ],
     "background": {
-        "service_worker": "background.js",
-        "scripts": ["background.js"]
+        "service_worker": "/internal/background.js",
+        "scripts": ["/internal/background.js"]
     },
     "host_permissions": [
         "https://*.itslearning.com/*"
