@@ -1,4 +1,3 @@
-
 /* Replaces Personnal Menu color and shape */
 ul.l-personal-menu-dd {
     background: none repeat scroll 0 0 #fff !important;
@@ -6,6 +5,7 @@ ul.l-personal-menu-dd {
     margin: 11px !important;
     height: auto !important;
     box-shadow: 0 1px 3px rgba(0,0,0,.275) !important;
+    max-height: 80vh !important;
 }
 .l-personal-menu-dd-header {
     background-color: #f9f9f9 !important;
