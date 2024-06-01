@@ -134,7 +134,6 @@ function injectContent(modsInfo, requiredContent, url, tabId, frameId) {
             }
         }
     }
-
     if (CSSfilesToAdd.length > 0) {
         console.log("Injecting CSS files '" + CSSfilesToAdd + "' in tab with id '" + tabId + "' in frame with id '" + frameId + "'")
         chrome.scripting.insertCSS({

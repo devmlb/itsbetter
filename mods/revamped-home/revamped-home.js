@@ -1,10 +1,6 @@
-async function apiCall(endpoint, method="GET", headers=undefined) {
-    if (headers === undefined) headers = {};
-    const response = await fetch("https://elyco.itslearning.com/restapi/" + endpoint, { method: method, headers: { ...headers, Cookie: document.cookie } });
-    return await response.json();
-}
-
 (async function() {
+    const itsbetterAPI = new ItsbetterAPI();
+
     if (window.location.host !== "elyco.itslearning.com") return
     if (window.location.pathname !== "/DashboardMenu.aspx") return
     const urlParams = new URLSearchParams(window.location.search)
@@ -16,7 +12,7 @@ async function apiCall(endpoint, method="GET", headers=undefined) {
 
         const iframeDashboard = document.createElement("iframe")
 
-        const hierarchy = await apiCall("personal/hierarchies/default/v1")
+        const hierarchy = await itsbetterAPI.apiCall("personal/hierarchies/default/v1")
         iframeDashboard.src = `/Dashboard/Dashboard.aspx?LocationID=${hierarchy.HierarchyId}&LocationType=Hierarchy`
         iframeDashboard.style.display = "none"
         mainElement.insertBefore(iframeDashboard, mainElement.querySelector("*"))
@@ -46,8 +42,8 @@ async function apiCall(endpoint, method="GET", headers=undefined) {
             const externalDiv = content.querySelector("#rh--nav--external")
 
             const associations = [
-                { name: "Pronote", regex: /^(http(s|):\/\/|)[0-9]{7}[a-z]\.index-education\.net\/pronote.*$/, icon: chrome.runtime.getURL("icons/pronote.webp") },
-                { name: "Esidoc", regex: /^(http(s|):\/\/|)[0-9]{7}[a-z]\.esidoc\.fr.*$/, icon: chrome.runtime.getURL("icons/esidoc.png") },
+                { name: "Pronote", regex: /^(http(s|):\/\/|)[0-9]{7}[a-z]\.index-education\.net\/pronote.*$/, icon: chrome.runtime.getURL("/mods/revamped-home/icons/pronote.webp") },
+                { name: "Esidoc", regex: /^(http(s|):\/\/|)[0-9]{7}[a-z]\.esidoc\.fr.*$/, icon: chrome.runtime.getURL("/mods/revamped-home/icons/esidoc.png") },
             ]
 
             const disabledLinks = [

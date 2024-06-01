@@ -20,6 +20,13 @@
         "48": "/internal/icons/itsbetter-icon-48.png",
         "128": "/internal/icons/itsbetter-icon-128.png"
     },
+    "content_scripts": [
+        {
+          "matches": ["<all_urls>"],
+          "js": ["/internal/itsbetter-api.js"],
+          "run_at": "document_start"
+        }
+      ],
     "web_accessible_resources": [
         {
         "resources": ["/mods/*", "/internal/*", "/mdui/*", "https://devmlb.github.io/itsbetter/*"],
