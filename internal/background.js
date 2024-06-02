@@ -72,7 +72,23 @@ function isFirefox() {
     return userAgent.includes('firefox');
 }
 
+function checkPermissions() {
+    chrome.permissions.contains({
+        origins: ["https://*.itslearning.com/*"]
+    }, function (response) {
+        if (!response) {
+            console.log("Not all permissions are granted. Opening the onboarding page.");
+            chrome.tabs.create({ url: chrome.runtime.getURL("/internal/onboarding.html") });
+        } else {
+            console.log(response);
+        }
+    });
+}
+
 function injectContent(modsInfo, requiredContent, url, tabId, frameId) {
+    if (frameId === 0) {
+        checkPermissions();
+    }
     const CSSfilesToAdd = [];
     const JSfilesToAdd = [];
     if (requiredContent["active-extension"]) {
@@ -167,9 +183,7 @@ chrome.webNavigation.onCommitted.addListener(function (details) {
 
 // Updates settings storage when the extension is installed or updated
 chrome.runtime.onInstalled.addListener(function (details) {
-    if (isFirefox()) {
-        // browser.permissions.request({ origins: ['https://*.itslearning.com/*'] })
-    }
+    checkPermissions();
     const currentVersion = chrome.runtime.getManifest().version;
     chrome.alarms.create("updateAlarm", { delayInMinutes: 1, periodInMinutes: 1440 })
     if (details.reason == "update") {
