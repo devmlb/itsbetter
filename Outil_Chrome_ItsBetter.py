@@ -178,7 +178,6 @@ class App:
                 key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path, 0, winreg.KEY_READ)
                 # Checks if the key is empty
                 if winreg.QueryInfoKey(key)[1] == 0:
-                    print("coucou")
                     winreg.DeleteKey(winreg.HKEY_LOCAL_MACHINE, key_path)
                 winreg.CloseKey(key)
                 return {"key_path": key_path, "error": (False, "")}
