@@ -1,5 +1,7 @@
 # <p align="center"><img src="https://github.com/devmlb/itsbetter/blob/main/internal/icons/banner.png?raw=true"  width="50%"></p>
 
+**Attention : cette extension n'est plus développée (plus d'accès au service Itslearning).**  
+  
 ItsBetter est une extension de navigateur qui modifie l'apparence du [site Itslearning](https://itslearning.com/index.aspx), utilisé pour faire fonctionner de nombreux ENT. Son but est d'apporter de la cohérence et de la praticité à l'interface.  
 Cette extension regroupe des mods qui correspondent en fait à des fonctionnalités indépendantes apportant chacune une modification bien précise à l'interface. Ces mods sont facilement activables ou désactivables depuis le popup de l'extension, contribuant ainsi à offrir un niveau de personnalisation poussé.  
 ItsBetter intègre également un module de mise à jour en attendant d'être (peut-être) disponible sur les magasins officiels.
